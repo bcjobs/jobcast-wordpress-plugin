@@ -1,0 +1,192 @@
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,100);
+
+
+/* Icons */
+.fontawesome-user:before,
+.fontawesome-lock:before,
+.fontawesome-envelope-alt:before,
+.fontawesome-envelope:before,
+.fontawesome-briefcase:before,
+.fontawesome-arrow-right:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+/* General */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+#pluginContainer {
+	background: url('bg.png'); 
+	width:98.5%;
+	background-color: white;
+	-webkit-box-shadow: 0 0 1rem #7F7F7F;
+	-moz-box-shadow: 0 0 1rem #7F7F7F;
+	box-shadow: 0 0 1rem #7F7F7F;
+}
+
+.wrap {
+    margin: 0;
+    min-height: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+/* Header */
+
+.login-header {
+    color: black;
+    text-align:center;
+    height: 100%;
+}
+
+.login-header h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+.login-header h2 {
+    font-weight: 100;
+    font-size: 3rem;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 1rem;
+    margin-top: -2rem;
+}
+
+
+/* Body */
+#registerLastName,
+#registerFirstName,
+#registerPassword,
+#loginPassword {
+    margin-left: 5px;
+}
+
+a {
+    outline: 0;
+    text-decoration: none;
+    color: black;
+}
+
+input {
+    border: 0;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    transition: background-color .3s;
+}
+
+.form input {
+    width: 100%;
+}
+
+.formField {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.formInput {
+    flex: 1;
+    background-color: #F5F5F5;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    color: black;
+}
+
+.formInput:hover, .formInput:focus {
+    background-color: ghostwhite;
+}
+
+.formInput:focus {
+    -webkit-box-shadow: 0 0 1rem #7F7F7F;
+    -moz-box-shadow: 0 0 1rem #7F7F7F;
+    box-shadow: 0 0 1rem #7F7F7F;
+}
+
+.form label {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+label, input {
+    border-radius: 0;
+    padding: 1rem;
+}
+
+#formSubmit {
+    background-color: #E31F8E;
+    color: #eee;
+    font-weight: bold;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+}
+
+#formSubmit:hover, #formSubmit:focus {
+    background-color: #d44179;
+}
+
+.hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.textCenter {
+    text-align: center;
+}
+.signIn {
+    color: #0088e0;
+    font-weight: bold;
+}
+
+.gridContainer {
+    margin: 0 auto;
+    max-width: 20rem;
+    width: 90%;
+}
+
+/* error */
+.errContainer {
+	margin:5px;
+}
+
+.displayError{
+	width:60%;
+	background-color: #ffffff;
+	padding: 20px;
+	border:1px solid #eee;
+	border-left-width:5px;
+	border-radius: 3px;
+	margin: 10px auto;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	border-left-color: #d9534f;
+	background-color: rgba(217, 83, 79, 0.1);
+}
+
+.displayError strong{
+	color:#d9534f;
+}
+
+@media (max-width: 658px) {
+    .login-header h1 {
+        font-size: 3rem;
+    }
+}
