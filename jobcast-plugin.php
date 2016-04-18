@@ -13,15 +13,15 @@ add_action('admin_menu', 'pluginSetup');
 function pluginSetup() {
 	define('jobcastFolder', 'jobcast-plugin');
 	define('URL', WP_PLUGIN_URL .'/' . jobcastFolder);
-	if(!isset($_SESSION['url'])) {	
-		$_SESSION['url'] = URL;	
-	}	
+	if(!isset($_SESSION['url'])) {
+		$_SESSION['url'] = URL;
+	}
 
 	wp_enqueue_style('jobcast_css_main', URL . '/css/main.css');
 	wp_enqueue_style('jobcast_css_login', URL . '/css/login.css');
-	
+
 	//adding the plugin to the sidebar;
-	add_menu_page('JobCast Plugin', 'JobCast Jobs', 'administrator', __FILE__, 
+	add_menu_page('JobCast Plugin', 'JobCast Jobs', 'administrator', __FILE__,
 	'handle_menu_to_display', 'https://www.jobcast.net/wp-content/themes/html5blank-stable/img/icons//favicon-16x16.png');
 	add_option('userapikey', 'Invalid', '', 'yes');
 	add_option('usercompany', 'Invalid', '', 'yes');
@@ -50,7 +50,7 @@ function jobcast_shortcode($atts) {
 
 function handle_menu_to_display() {
 	$stored_api = get_option('userapikey');
-	
+
 	//if we can fetch a userapi from db then always set up a session;
 	if($stored_api != "Invalid" && (!isset($_SESSION['userapi']))) {
 		$_SESSION['userapi'] = $stored_api;
