@@ -1,64 +1,64 @@
 <?php
-		session_start();
-		if(!isset($_SESSION['userapi'])) {
-				$_SESSION['error'] = "Account not activated, Please login to continue.";
-				header("Refresh:0;");
-				exit();
-		}
-		//sending a sessionsMe request everytime this page is loaded
-	$sessionsme = getSessionsMe($_SESSION['userapi']);
+session_start();
+if(!isset($_SESSION['userapi'])) {
+		$_SESSION['error'] = "Account not activated, Please login to continue.";
+		refresh_page();
+		exit();
+}
+//sending a sessionsMe request everytime this page is loaded
+$sessionsme = getSessionsMe($_SESSION['userapi']);
 
-	//If the request came back empty that means something went wrong so we delete the
-	//userapikey from the DB and request user to relogin
-		if(empty($sessionsme)) {
-				$_SESSION['error'] = "An error occured, please log in again!";
-				update_option('userapikey', 'Invalid', '', 'yes');
-				$_SESSION['isLoginPage'] == true;
-				header("Refresh:0;");
-				exit();
-		}
+//If the request came back empty that means something went wrong so we delete the
+//userapikey from the DB and request user to relogin
+if(empty($sessionsme)) {
+		$_SESSION['error'] = "An error occured, please log in again!";
+		update_option('userapikey', 'Invalid', '', 'yes');
+		$_SESSION['isLoginPage'] == true;
+		refresh_page();
+		exit();
+}
 
-	/* Parsing through our SessionsMe and getting all the information about the users companies; */
-		$companyInfo = array();
-		$firstCompany = $sessionsme['companies'][0]['name'];
+/* Parsing through our SessionsMe and getting all the information about the users companies; */
+$companyInfo = array();
+$firstCompany = $sessionsme['companies'][0]['name'];
 
-		$numOfCompanies = count($sessionsme['companies']);
+$numOfCompanies = count($sessionsme['companies']);
 
-		for($i = 0; $i < $numOfCompanies; $i++) {
-				$companyInfo[$sessionsme['companies'][$i]['id']]['code'] = $sessionsme['companies'][$i]['embedCode'];
-				$companyInfo[$sessionsme['companies'][$i]['id']]['name'] = $sessionsme['companies'][$i]['name'];
-		}
+for($i = 0; $i < $numOfCompanies; $i++) {
+		$companyInfo[$sessionsme['companies'][$i]['id']]['code'] = $sessionsme['companies'][$i]['embedCode'];
+		$companyInfo[$sessionsme['companies'][$i]['id']]['name'] = $sessionsme['companies'][$i]['name'];
+}
 
-		$_SESSION['company'] = $companyInfo;
-		update_option('usercompany', $companyInfo, '', 'yes');
+$_SESSION['company'] = $companyInfo;
+update_option('usercompany', $companyInfo, '', 'yes');
 
-		$redirectErrorUrl = $_SESSION['url'] . '/deactivate_plugin.php';
+$redirectErrorUrl = $_SESSION['url'] . '/deactivate_plugin.php';
 
 
-	/* Helper function for sessionsMe Request; */
-	function getSessionsMe($userapi) {
-				$headers = array(
-						'Content-Type: application/json; charset=UTF-8',
-						'Connection: keep-alive',
-						'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36',
-						'User-Api-Key: '. $userapi
-				);
+/* Helper function for sessionsMe Request; */
+function getSessionsMe($userapi) {
+	$headers = array(
+			'Content-Type: application/json; charset=UTF-8',
+			'Connection: keep-alive',
+			'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36',
+			'User-Api-Key: '. $userapi
+	);
 
-				$ch = curl_init('https://app.jobcast.net/api/v2.0/sessions/me');
+	$ch = curl_init('https://app.jobcast.net/api/v2.0/sessions/me');
 
-				curl_setopt($ch, CURLOPT_HTTPGET, true);
-				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true ); //this returns the body;
-				curl_setopt($ch, CURL_HTTP_VERSION_1_1, true);
+	curl_setopt($ch, CURLOPT_HTTPGET, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true ); //this returns the body;
+	curl_setopt($ch, CURL_HTTP_VERSION_1_1, true);
 
-				$result = curl_exec($ch);
-				curl_close($ch);
+	$result = curl_exec($ch);
+	curl_close($ch);
 
-				if(strlen($result) < 100)
-						return array();
+	if(strlen($result) < 100)
+			return array();
 
-				return json_decode($result , true);
-		}
+	return json_decode($result , true);
+	}
 ?>
 <div class="wrap">
 		<div id="pluginContainer">
@@ -152,52 +152,52 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
 
-		var newHeight = $(document).height();
-		$('#pluginContainer').css('min-height', newHeight);
+var newHeight = $(document).height();
+$('#pluginContainer').css('min-height', newHeight);
 
-		$(document).ready(function(){
+$(document).ready(function(){
 
-				$("#dropdown").change(function(){
-						var x = $("#dropdown option:selected").text();
-						if(x == "Select Company")
-								$("#embeded").text("[jobcast companyname=<?php echo $firstCompany; ?>]");
-						else
-								$("#embeded").text("[jobcast companyname=\""+x+"\"]");
-				});
+	$("#dropdown").change(function(){
+			var x = $("#dropdown option:selected").text();
+			if(x == "Select Company")
+					$("#embeded").text("[jobcast companyname=<?php echo $firstCompany; ?>]");
+			else
+					$("#embeded").text("[jobcast companyname=\""+x+"\"]");
+	});
 
 
-		/* Using Javascript to submit our invisble form so we can make the request and get the browser to redirect to the sucessURL*/
-				$("#addJob").click(function() {
-						var companyID       = $("#dropdown").val();
-						if(companyID == null) {
-								companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
-						}
-						var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/jobs/new";
+/* Using Javascript to submit our invisble form so we can make the request and get the browser to redirect to the sucessURL*/
+	$("#addJob").click(function() {
+			var companyID       = $("#dropdown").val();
+			if(companyID == null) {
+					companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
+			}
+			var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/jobs/new";
 
-						document.getElementById('redirect').value = newSuccessUrl;
-						document.getElementById('formLogin').submit();
-				});
+			document.getElementById('redirect').value = newSuccessUrl;
+			document.getElementById('formLogin').submit();
+	});
 
-				$("#manageJobs").click(function() {
-						var companyID       = $("#dropdown").val();
-						if(companyID == null) {
-								companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
-						}
-						var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/jobs";
+	$("#manageJobs").click(function() {
+			var companyID       = $("#dropdown").val();
+			if(companyID == null) {
+					companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
+			}
+			var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/jobs";
 
-						document.getElementById('redirect').value = newSuccessUrl;
-						document.getElementById('formLogin').submit();
-				});
+			document.getElementById('redirect').value = newSuccessUrl;
+			document.getElementById('formLogin').submit();
+	});
 
-				$("#branding").click(function() {
-						var companyID       = $("#dropdown").val();
-						if(companyID == null) {
-								companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
-						}
-						var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/branding/careersite";
+	$("#branding").click(function() {
+			var companyID       = $("#dropdown").val();
+			if(companyID == null) {
+					companyID = <?php echo $sessionsme['companies'][0]['id']; ?>;
+			}
+			var newSuccessUrl   = "https://app.jobcast.net/dashboard/companies/"+ companyID+ "/branding/careersite";
 
-						document.getElementById('redirect').value = newSuccessUrl;
-						document.getElementById('formLogin').submit();
-				});
-		});
+			document.getElementById('redirect').value = newSuccessUrl;
+			document.getElementById('formLogin').submit();
+	});
+});
 </script>

@@ -58,7 +58,7 @@ function handle_menu_to_display() {
 
 	/* This handles actually displaying a page to the user */
 	if(isset($_SESSION['userapi'])) {
-		require 'jobcast-main.php'; //require basically brings the entire code of that file in here;
+		require 'jobcast-main.php'; //require function basically brings the entire code of that file in here;
 	} else {
 		require 'jobcast-landing.php';
 	}
@@ -77,8 +77,12 @@ function deactivate_plugin() {
 	session_destroy();
 	session_start();
 	$_SESSION['error'] = "An error occured, please log in again!";
-	header("Refresh:0;");
+	refresh_page();
 	exit();
+}
+
+function refresh_page() {
+	echo '<script>location.reload();</script>';
 }
 
 ?>

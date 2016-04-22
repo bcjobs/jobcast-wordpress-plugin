@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 //putting all the post input fields into an array so we can make sure nothing was left empty;
 $postFields['email'] 	= $_POST['email'];
 $postFields['pass'] 	= $_POST['password'];
@@ -14,21 +13,21 @@ foreach($postFields as $value) {
 	$value = trim($value);
 	if(empty($value)) {
 		$_SESSION['error'] = "Please fill in all of the fields.";
-		header("Refresh:0;");
+		refresh_page();
 		//we die after all our headers because if they didnt get redirected for some reason, we dont want our script to keep running;
-		die();	
-	}		
+		die();
+	}
 }
 
 if(!filter_var($postFields['email'], FILTER_VALIDATE_EMAIL)) {
 	$_SESSION['error'] = "Please enter a valid email.";
-	header("Refresh:0;");
+	refresh_page();
 	die();
 }
 
 if(strlen($postFields['pass']) < 6) {
 	$_SESSION['error'] = "You're password must be greater than 6 characters.";
-	header("Refresh:0;");
+	refresh_page();
 	die();
 }
 /*End of validation*/
@@ -38,10 +37,10 @@ $data = array("login" => array("email" => $postFields['email'], "password" => $p
 $json_data = json_encode($data);
 
 $headers = array(
-    'Content-Type: application/json; charset=UTF-8',
-    'Connection: keep-alive',
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36',
-    'Content-Length: ' . strlen($json_data)
+	'Content-Type: application/json; charset=UTF-8',
+	'Connection: keep-alive',
+	'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36',
+	'Content-Length: ' . strlen($json_data)
 );
 
 
@@ -63,12 +62,12 @@ $body = substr($result, $header_size);
 curl_close($ch);
 
 //if the body of the result is not empty that means API v2 returned an error;
-if(!empty($body)) { 
+if(!empty($body)) {
 	$errorArray = json_decode($body , true);
-	
+
 	$_SESSION['error'] = $errorArray['errors']['base'][0];
-	header("Refresh:0;");
-	die();	
+	refresh_page();
+	die();
 } else {
 	/*Extracting the cookie from the headers;*/
 	$pieces = explode(" ", $result);
@@ -76,17 +75,17 @@ if(!empty($body)) {
 	for($i = 0; $i < count($pieces); $i++)
 		if(preg_match("/Set-Cookie:/", $pieces[$i]))
 			$cookie = $pieces[$i+1];
-			
+
 	$cookie = substr($cookie, 0, -1);
 	/* End of extraction; */
 
 	$sessionsMe = getSessionsMe($cookie);
-	
+
 	$userapi = $sessionsMe['users'][0]['apiKey'];
 	$_SESSION['userapi'] = $userapi;
-	
+
 	update_option('userapikey', $userapi, '', 'yes'); //updating the database;
-	header("Refresh:0;");
+	refresh_page();
 	die();
 }
 
@@ -101,12 +100,13 @@ function getSessionsMe($cookie) {
 	$ch = curl_init('https://app.jobcast.net/api/v2.0/sessions/me');
 
 	curl_setopt($ch, CURLOPT_HTTPGET, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
 	curl_setopt($ch, CURL_HTTP_VERSION_1_1, true);
 
 	$result = curl_exec($ch);
 	curl_close($ch);
-	
+
 	return json_decode($result , true);
 }
+?>
