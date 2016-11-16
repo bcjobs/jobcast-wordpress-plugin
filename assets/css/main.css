@@ -1,40 +1,33 @@
-/* General */
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-
 /* text */
 
-.rightText {
+#jobcast_plugin .rightText {
 	width :100%;
 }
 
-#pluginContainer h2 {
+#jobcast_plugin #pluginContainer h2 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	font-weight: 400;
 	font-size: 18px;
 }
-hr {
+#jobcast_plugin hr {
 	margin: 4em 5em;
 	border: solid 1px #00D9FF;
 }
 
 /* Header */
 
-.header {
+#jobcast_plugin .header {
 	width: 100%;
 	height: 100px;
 	background-color: #F1F1F1;
 }
 
-.head {
+#jobcast_plugin .head {
 	height: 100px;
 }
 
-#logo {
+#jobcast_plugin #logo {
 	background: url('https://app.jobcast.net/dashboard/images/jobcast-logo.svg');
 	background-repeat: no-repeat;
 	float: left;
@@ -44,7 +37,7 @@ hr {
 	margin-top: 1.5%;
 }
 
-ul.nav {
+#jobcast_plugin ul.nav {
 	float: right;
 	list-style: none;
 }
@@ -53,7 +46,7 @@ ul.nav {
 
 /* Body */
 
-.container {
+#jobcast_plugin .container {
 	position: relative;
 	width: 100%;
 	margin: 0 auto;
@@ -64,7 +57,7 @@ ul.nav {
 	overflow: hidden;
 }
 
-#homepageHeader {
+#jobcast_plugin #homepageHeader {
 	margin-top: 2rem;
 	font-weight: 300;
 	font-size: 3rem;
@@ -72,19 +65,19 @@ ul.nav {
 	font-family: 'Lato', sans-serif;
 }
 
-section {
+#jobcast_plugin section {
     margin-top: 50px;
 }
 
 /* Left side */
-.left {
+#jobcast_plugin .left {
 	float: left;
 	width: 30%;
 	text-align: center;
 	padding: 2em;
 }
 
-.buttons input {
+#jobcast_plugin .buttons input {
 	border: 0;
 	color: inherit;
 	font: inherit;
@@ -98,7 +91,7 @@ section {
 	-webkit-appearance: none;
 }
 
-.buttons {
+#jobcast_plugin .buttons {
 	background-color: #e4e4e4;
 	padding: 4%;
 	margin: 5%;
@@ -107,13 +100,15 @@ section {
 	align-content: center;
 }
 
-#addJob, #manageJobs, #branding {
+#jobcast_plugin #addJob, 
+#jobcast_plugin #manageJobs, 
+#jobcast_plugin #branding {
 	cursor: pointer;
 }
 
 
 /* Select dropdown : */
-.select-style {
+#jobcast_plugin .select-style {
 	padding: 0;
 	margin: 0;
 	border: 1px solid #ccc;
@@ -124,7 +119,7 @@ section {
 	background-color: #fff;
 	background: #fff url("arrowdown.gif") no-repeat 90% 50%;
 }
-.select-style select {
+#jobcast_plugin .select-style select {
 	padding: 5px 8px;
 	width: 130%;
 	height: 100%;
@@ -135,7 +130,7 @@ section {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-.select-style option {
+#jobcast_plugin .select-style option {
 	padding: 5px 8px;
 	width: 130%;
 	border: none;
@@ -145,28 +140,28 @@ section {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-.select-style select:focus {
+#jobcast_plugin .select-style select:focus {
 	outline: none;
 }
 /* right */
 
-#right {
+#jobcast_plugin #right {
 	margin-right: 0px;
 	padding: 2%;
 	margin-left: 3%;
 	width: 65%;
 }
-#right h2 {
+#jobcast_plugin #right h2 {
 	width: 100%;
 }
 
-.col {
+#jobcast_plugin .col {
 	padding: 0;
 	margin: 0;
 	position: relative;
 }
 
-.col.display {
+#jobcast_plugin .col.display {
     margin: 0 auto;
     padding: 0 2.5%;
     padding-top: 20px;
@@ -176,14 +171,14 @@ section {
     text-align: center;
 }
 
-#embeded {
+#jobcast_plugin #embeded {
 	font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
 	font-weight: 550;
 	font-size: 20px;
 	cursor: text;
 }
 
-#demoIMG {
+#jobcast_plugin #demoIMG {
     background: url('demoshortcode.png');
     background-repeat: no-repeat;
     width: 100%;
@@ -198,29 +193,29 @@ Responsive
 */
 
 
-#right h1 {
+#jobcast_plugin #right h1 {
   text-align: center;
 }
 @media all and (max-width: 775px) {
-  .container {
+  #jobcast_plugin .container {
     width: 95%;
   }
-  .left {
+  #jobcast_plugin .left {
     width: 100%;
   }
-  .buttons {
+  #jobcast_plugin .buttons {
     margin: 5%;
   }
-  input {
+  #jobcast_plugin input {
     margin-left: 10%;
     margin-right: 10%;
   }
-  .header {
+  #jobcast_plugin .header {
     height: auto;
     padding-top: 10px;
     background: #eee;
   }
-  #logo {
+  #jobcast_plugin #logo {
     position: initial;
     float: none;
     display: block;
@@ -228,16 +223,16 @@ Responsive
     margin: 0 auto;
   }
 
-  .left {
+  #jobcast_plugin .left {
     float: none;
     width: 100%;
   }
-  #right {
+  #jobcast_plugin #right {
     width: 100%;
   }
 }
 @media ( min-width: 775px) {
-  section {
+  #jobcast_plugin section {
     display: -webkit-flex;
     display: flex;
   }
