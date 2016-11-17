@@ -175,12 +175,7 @@ function jobcast_admin_page() {
     
   
     require 'templates/jobcast-landing.php';
-    
-    echo "<pre>";
-    print_r($_POST);
-    print_r($_SESSION);
-    print_r($jobcast);
-    echo "</pre>";
+
     
   }
   
