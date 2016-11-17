@@ -1,16 +1,4 @@
-<?php
-session_start();
-
-/*This page posts to itself and uses a validation php script based on the button that was pressed; */
-if(isset($_POST['submitRegister'])) {
-	require_once 'validateRegister.php';
-} else if(isset($_POST['submitLogin'])) {
-	require_once 'validateLogin.php';
-}
-
-$currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php";
-?>
-<div class="wrap">
+<div id='jobcast_plugin' class="wrap">
 	<div id="pluginContainer">
 	  <!-- Header -->
 		<div class="header">
@@ -27,12 +15,12 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 				<h1>30 Day Free Trial</h1>
 			</div>
 
-			<?php if(isset($_SESSION['error']) && $_SESSION['isLoginPage'] == false) : ?>
+			<?php if(isset($_SESSION['jobcast_error']) && $_SESSION['jobcast_isLoginPage'] == false) : ?>
 				<br>
 				<br>
 				<div class="errContainer">
 					<div class="displayError">
-						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['error'] ?></span>
+						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['jobcast_error'] ?></span>
 					</div>
 				</div>
 
@@ -42,37 +30,37 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 			<br>
 
 			<div class="gridContainer">
-				<form action="<?php echo $currentURL;?>" method="post" class="form">
+				<form action="<?php echo $_SERVER["PHP_SELF"];?>?page=jobcast-plugin" method="post" class="form">
 
 					<div class="formField"> 
 						<label class="fontawesome-user" for="registerFirstName"><span class="hidden">FirstName</span></label>
-						<input id="registerFirstName" name="firstname" type="text" class="formInput" placeholder="first name" required>
+						<input id="registerFirstName" name="jobcast_firstname" type="text" class="formInput" placeholder="first name" required>
 					</div>
 
 					<div class="formField">
 						<label class="fontawesome-user" for="registerLastName"><span class="hidden">Lastname</span></label>
-						<input id="registerLastName" name="lastname" type="text" class="formInput" placeholder="last name" required>
+						<input id="registerLastName" name="jobcast_lastname" type="text" class="formInput" placeholder="last name" required>
 					</div>
 
 
 					<div class="formField">
 						<label class="fontawesome-briefcase" for="registerCompany"><span class="hidden">Company</span></label>
-						<input id="registerCompany" name="company" type="text" class="formInput" placeholder="company name" required>
+						<input id="registerCompany" name="jobcast_company" type="text" class="formInput" placeholder="company name" required>
 					</div>
 
 					<div class="formField">
 						<label class="fontawesome-envelope-alt" for="registerEmail"><span class="hidden">Email</span></label>
-						<input id="registerEmail" name="email" type="text" class="formInput" placeholder="email" required>
+						<input id="registerEmail" name="jobcast_email" type="text" class="formInput" placeholder="email" required>
 					</div>
 
 					<div class="formField">
 						<label class="fontawesome-lock" for="registerPassword"><span class="hidden">Password</span></label>
-						<input id="registerPassword" name="password" type="password" class="formInput" placeholder="password" required>
+						<input id="registerPassword" name="jobcast_password" type="password" class="formInput" placeholder="password" required>
 					</div>
 
 
 					<div class="formField">
-						<input id="formSubmit" type="submit" value="Register Now" name="submitRegister">
+						<input id="formSubmit" type="submit" value="Register Now" name="jobcast_submitRegister">
 					</div>
 
 				</form>
@@ -90,16 +78,16 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 				<h1>Activate your account</h1>
 			</div>
 
-			<?php if(isset($_SESSION['error']) && $_SESSION['isLoginPage'] == true) : ?>
+			<?php if(isset($_SESSION['jobcast_error']) && $_SESSION['jobcast_isLoginPage'] == true) : ?>
 				<div class="errContainer">
 					<div class="displayError">
-						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['error'] ?></span>
+						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['jobcast_error'] ?></span>
 					</div>
 				</div>
 			<?php
 				endif;
-				if(isset($_SESSION['error']))
-					unset($_SESSION['error']);
+				if(isset($_SESSION['jobcast_error']))
+					unset($_SESSION['jobcast_error']);
 			?>
 			<br>
 
@@ -109,17 +97,17 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 
 					<div class="formField">
 						<label class="fontawesome-envelope-alt" for="loginEmail"><span class="hidden">Email</span></label>
-						<input id="loginEmail" name="email" type="text" class="formInput" placeholder="email" required>
+						<input id="loginEmail" name="jobcast_email" type="text" class="formInput" placeholder="email" required>
 					</div>
 
 					<div class="formField">
 						<label class="fontawesome-lock" for="loginPassword"><span class="hidden">Password</span></label>
-						<input id="loginPassword" name="password" type="password" class="formInput" placeholder="password" required>
+						<input id="loginPassword" name="jobcast_password" type="password" class="formInput" placeholder="password" required>
 					</div>
 
 
 					<div class="formField">
-						<input id="formSubmit" type="submit" name="submitLogin" value="Sign in">
+						<input id="formSubmit" type="submit" name="jobcast_submitLogin" value="Sign in">
 					</div>
 
 				</form>
@@ -130,23 +118,23 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 		</div> <!-- End of show Register -->
 	</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <script>
 
-  $(document).ready(function(){
+jQuery(function($){
+
 	var flag = false;
 	var newHeight = $(window).height();
 
 	$('#pluginContainer').css('min-height', newHeight);
 
 	<?php
-		if($_SESSION['isLoginPage'] == true)
+		if($_SESSION['jobcast_isLoginPage'] === true)
 			echo 'flag = true';
 	?>
 
 	  /* Using Jquery to only display Register or Login at one time; */
-	if(flag == true)
+	if(flag === true)
 		$("#showRegister").hide();
 	else
 		$("#showLogin").hide();
@@ -161,5 +149,6 @@ $currentURL = $_SERVER["PHP_SELF"] . "?page=jobcast-plugin%2Fjobcast-plugin.php"
 		$("#showLogin").hide();
 	});
 
-  });
+});
+
 </script>

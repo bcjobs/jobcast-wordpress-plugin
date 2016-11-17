@@ -4,25 +4,21 @@
 
 
 /* Icons */
-.fontawesome-user:before,
-.fontawesome-lock:before,
-.fontawesome-envelope-alt:before,
-.fontawesome-envelope:before,
-.fontawesome-briefcase:before,
-.fontawesome-arrow-right:before {
+#jobcast_plugin .fontawesome-user:before,
+#jobcast_plugin .fontawesome-lock:before,
+#jobcast_plugin .fontawesome-envelope-alt:before,
+#jobcast_plugin .fontawesome-envelope:before,
+#jobcast_plugin .fontawesome-briefcase:before,
+#jobcast_plugin .fontawesome-arrow-right:before {
     font-family: 'FontAwesome', sans-serif;
 }
 
 /* General */
-* {
+#jobcast_plugin * {
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-}
-
-#pluginContainer {
+#jobcast_plugin #pluginContainer {
 	background: url('bg.png'); 
 	width:98.5%;
 	background-color: white;
@@ -31,7 +27,7 @@ html {
 	box-shadow: 0 0 1rem #7F7F7F;
 }
 
-.wrap {
+#jobcast_plugin .wrap {
     margin: 0;
     min-height: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -40,20 +36,20 @@ html {
 
 /* Header */
 
-.login-header {
+#jobcast_plugin .login-header {
     color: black;
     text-align:center;
     height: 100%;
 }
 
-.login-header h1 {
+#jobcast_plugin .login-header h1 {
     font-size: 4rem;
     font-weight: 300;
     font-family: 'Lato', sans-serif;
     height: 100%;
 }
 
-.login-header h2 {
+#jobcast_plugin .login-header h2 {
     font-weight: 100;
     font-size: 3rem;
     font-family: 'Lato', sans-serif;
@@ -63,20 +59,20 @@ html {
 
 
 /* Body */
-#registerLastName,
-#registerFirstName,
-#registerPassword,
-#loginPassword {
+#jobcast_plugin #registerLastName,
+#jobcast_plugin #registerFirstName,
+#jobcast_plugin #registerPassword,
+#jobcast_plugin #loginPassword {
     margin-left: 5px;
 }
 
-a {
+#jobcast_plugin a {
     outline: 0;
     text-decoration: none;
     color: black;
 }
 
-input {
+#jobcast_plugin input {
     border: 0;
     color: inherit;
     font: inherit;
@@ -86,16 +82,16 @@ input {
     transition: background-color .3s;
 }
 
-.form input {
+#jobcast_plugin .form input {
     width: 100%;
 }
 
-.formField {
+#jobcast_plugin .formField {
     display: flex;
     margin-bottom: 1rem;
 }
 
-.formInput {
+#jobcast_plugin .formInput {
     flex: 1;
     background-color: #F5F5F5;
     border-bottom-left-radius: 0;
@@ -103,29 +99,31 @@ input {
     color: black;
 }
 
-.formInput:hover, .formInput:focus {
+#jobcast_plugin .formInput:hover, 
+#jobcast_plugin .formInput:focus {
     background-color: ghostwhite;
 }
 
-.formInput:focus {
+#jobcast_plugin .formInput:focus {
     -webkit-box-shadow: 0 0 1rem #7F7F7F;
     -moz-box-shadow: 0 0 1rem #7F7F7F;
     box-shadow: 0 0 1rem #7F7F7F;
 }
 
-.form label {
+#jobcast_plugin .form label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
 }
 
-label, input {
+#jobcast_plugin label, 
+#jobcast_plugin input {
     border-radius: 0;
     padding: 1rem;
 }
 
-#formSubmit {
+#jobcast_plugin #formSubmit {
     background-color: #E31F8E;
     color: #eee;
     font-weight: bold;
@@ -133,11 +131,12 @@ label, input {
     -webkit-appearance: none;
 }
 
-#formSubmit:hover, #formSubmit:focus {
+#jobcast_plugin #formSubmit:hover, 
+#jobcast_plugin #formSubmit:focus {
     background-color: #d44179;
 }
 
-.hidden {
+#jobcast_plugin .hidden {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -148,26 +147,26 @@ label, input {
     width: 1px;
 }
 
-.textCenter {
+#jobcast_plugin .textCenter {
     text-align: center;
 }
-.signIn {
+#jobcast_plugin .signIn {
     color: #0088e0;
     font-weight: bold;
 }
 
-.gridContainer {
+#jobcast_plugin .gridContainer {
     margin: 0 auto;
     max-width: 20rem;
     width: 90%;
 }
 
 /* error */
-.errContainer {
+#jobcast_plugin .errContainer {
 	margin:5px;
 }
 
-.displayError{
+#jobcast_plugin .displayError{
 	width:60%;
 	background-color: #ffffff;
 	padding: 20px;
@@ -181,12 +180,12 @@ label, input {
 	background-color: rgba(217, 83, 79, 0.1);
 }
 
-.displayError strong{
+#jobcast_plugin .displayError strong{
 	color:#d9534f;
 }
 
 @media (max-width: 658px) {
-    .login-header h1 {
+    #jobcast_plugin .login-header h1 {
         font-size: 3rem;
     }
 }
