@@ -15,12 +15,14 @@
 				<h1>30 Day Free Trial</h1>
 			</div>
 
-			<?php if(isset($_SESSION['jobcast_error']) && $_SESSION['jobcast_isLoginPage'] == false) : ?>
+			<?php if(!empty($jobcast->errors)) : ?>
 				<br>
 				<br>
 				<div class="errContainer">
 					<div class="displayError">
-						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['jobcast_error'] ?></span>
+            <?php foreach($jobcast->errors as $error) : ?>
+						<strong>Error</strong> - <span id="errMessege"><?php echo $error ?></span>
+						<?php endforeach; ?>
 					</div>
 				</div>
 
@@ -30,7 +32,7 @@
 			<br>
 
 			<div class="gridContainer">
-				<form action="<?php echo $_SERVER["PHP_SELF"];?>?page=jobcast-plugin" method="post" class="form">
+				<form action="<?php echo $currentURL; ?>" method="post" class="form">
 
 					<div class="formField"> 
 						<label class="fontawesome-user" for="registerFirstName"><span class="hidden">FirstName</span></label>
@@ -78,16 +80,16 @@
 				<h1>Activate your account</h1>
 			</div>
 
-			<?php if(isset($_SESSION['jobcast_error']) && $_SESSION['jobcast_isLoginPage'] == true) : ?>
+			<?php if(!empty($jobcast->errors)) : ?>
 				<div class="errContainer">
 					<div class="displayError">
-						<strong>Error</strong> - <span id="errMessege"><?php echo $_SESSION['jobcast_error'] ?></span>
+						<?php foreach($jobcast->errors as $error) : ?>
+						<strong>Error</strong> - <span id="errMessege"><?php echo $error ?></span>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			<?php
 				endif;
-				if(isset($_SESSION['jobcast_error']))
-					unset($_SESSION['jobcast_error']);
 			?>
 			<br>
 
@@ -123,15 +125,10 @@
 
 jQuery(function($){
 
-	var flag = false;
+	var flag = <?php echo isset($_POST['jobcast_submitLogin']) ? 'true' : 'false'; ?>;
 	var newHeight = $(window).height();
 
 	$('#pluginContainer').css('min-height', newHeight);
-
-	<?php
-		if($_SESSION['jobcast_isLoginPage'] === true)
-			echo 'flag = true';
-	?>
 
 	  /* Using Jquery to only display Register or Login at one time; */
 	if(flag === true)

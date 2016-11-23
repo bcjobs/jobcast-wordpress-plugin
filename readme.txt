@@ -7,7 +7,7 @@ Author URI: https://www.jobcast.net
 Plugin URI: https://www.jobcast.net
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,8 @@ This plugin allows you to create and manage your Jobcast.net recruiting app acco
 Create a mobile-friendly social Career Site, add images and video to your job ads, and then share them to all of your social networks at once.
 
 = Some of Jobcast's Features =
+
+
 
 Automated Sharing
 
@@ -70,6 +72,10 @@ Manual Install:
 
 
 == Changelog ==
+
+= 1.1 =
+
+* Updating for error reporting of login issues
 
 = 1.0 =
 
